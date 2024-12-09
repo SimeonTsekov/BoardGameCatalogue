@@ -1,15 +1,152 @@
-<script setup>
-</script>
-
 <template>
-  <header>
-      <h1>Board Games Catalogue</h1>
-    </header>
+  <div id="app">
+    <h1>Board Games Catalogue</h1>
+    <button @click="toggleForm">{{ showForm ? "Close Form" : "Add New Board Game" }}</button>
 
-  <main>
-    <h1>Body</h1>
-  </main>
+    <!-- Popover for the form -->
+    <div
+      v-if="showForm"
+      class="popover-overlay"
+      @click.self="toggleForm"
+    >
+      <div class="popover-content">
+        <AddBoardGameForm @add-game="addGame" />
+        <button class="close-button" @click="toggleForm">X</button>
+      </div>
+    </div>
+
+    <div v-if="games.length" class="game-list">
+      <h2>Games List</h2>
+      <ul>
+        <li v-for="(game, index) in games" :key="index">
+          <img :src="game.image" :alt="game.name" class="game-image" />
+          <div>
+            <h3>{{ game.name }}</h3>
+            <p>{{ game.description }}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
-<style scoped>
+<script>
+import AddBoardGameForm from "./components/AddBoardGameForm.vue";
+
+export default {
+  components: {
+    AddBoardGameForm,
+  },
+  data() {
+    return {
+      showForm: false,
+      games: [], // Array to hold the list of board games
+    };
+  },
+  methods: {
+    toggleForm() {
+      this.showForm = !this.showForm;
+    },
+    addGame(newGame) {
+      this.games.push(newGame); // Add the new game to the list
+      this.showForm = false; // Close the form after submission
+    },
+  },
+};
+</script>
+
+<style>
+/* Styling for the app */
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Popover styles */
+.popover-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.popover-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+  max-width: 400px;
+  width: 100%;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: red;
+}
+
+/* Game list styles */
+.game-list {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.game-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.game-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.game-image {
+  width: 100px;
+  height: 100px;
+  margin-right: 15px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.game-list h3 {
+  margin: 0;
+}
+
+.game-list p {
+  margin: 5px 0 0;
+}
 </style>
