@@ -16,7 +16,7 @@
       <div class="form-group">
         <label for="image">Image URL:</label>
         <input
-          type="url"
+          type="text"
           id="image"
           v-model="boardGame.image"
           placeholder="Enter image URL"
