@@ -48,19 +48,16 @@ import BoardGame from "@/model/BoardGame";
 export default {
   name: "AddBoardGameForm",
   setup(props, { emit }) {
-    // Reactive form fields using ref
     const name = ref("");
     const image = ref("");
     const description = ref("");
 
-    // Submit form method
     const submitForm = () => {
       const newGame = new BoardGame(name.value, image.value, description.value);
-      emit("add-game", newGame); // Emit the new game to the parent
-      resetForm(); // Reset the form fields
+      emit("add-game", newGame);
+      resetForm();
     };
 
-    // Reset form fields
     const resetForm = () => {
       name.value = "";
       image.value = "";
