@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <h1>Board Games Catalogue</h1>
-
-    <!-- Button to toggle the form -->
-    <button @click="toggleForm">{{ "Add New Board Game" }}</button>
+    <button @click="toggleForm">{{ showForm ? "Close Form" : "Add New Board Game" }}</button>
 
     <!-- Popover for the form -->
     <div
@@ -17,14 +15,10 @@
       </div>
     </div>
 
-    <!-- Filter Component -->
-    <FilterBoardGames v-model:filterText="filterText" />
-
-    <!-- Filtered list of board games -->
-    <div v-if="filteredGames.length" class="game-list">
+    <div v-if="games.length" class="game-list">
       <h2>Games List</h2>
       <ul>
-        <li v-for="(game, index) in filteredGames" :key="index">
+        <li v-for="(game, index) in games" :key="index">
           <img :src="game.image" :alt="game.name" class="game-image" />
           <div>
             <h3>{{ game.name }}</h3>
@@ -38,27 +32,16 @@
 
 <script>
 import AddBoardGameForm from "./components/AddBoardGameForm.vue";
-import FilterBoardGames from "./components/FilterBoardGames.vue";
 
 export default {
   components: {
     AddBoardGameForm,
-    FilterBoardGames,
   },
   data() {
     return {
       showForm: false,
-      games: [], // Array to hold all board games
-      filterText: "", // Text used to filter games
+      games: [], // Array to hold the list of board games
     };
-  },
-  computed: {
-    filteredGames() {
-      // Filter games by name based on `filterText`
-      return this.games.filter((game) =>
-        game.name.toLowerCase().includes(this.filterText.toLowerCase())
-      );
-    },
   },
   methods: {
     toggleForm() {
