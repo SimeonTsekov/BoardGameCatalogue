@@ -7,7 +7,7 @@
         <input
           type="text"
           id="name"
-          v-model="boardGame.name"
+          v-model="name"
           placeholder="Enter board game name"
           required
         />
@@ -16,9 +16,9 @@
       <div class="form-group">
         <label for="image">Image URL:</label>
         <input
-          type="url"
+          type="test"
           id="image"
-          v-model="boardGame.image"
+          v-model="image"
           placeholder="Enter image URL"
           required
         />
@@ -28,7 +28,7 @@
         <label for="description">Description:</label>
         <textarea
           id="description"
-          v-model="boardGame.description"
+          v-model="description"
           placeholder="Enter board game description"
           rows="4"
           required
@@ -41,27 +41,26 @@
 </template>
 
 <script>
+import BoardGame from "../model/BoardGame";
+
 export default {
   data() {
     return {
-      boardGame: {
-        name: "",
-        image: "",
-        description: "",
-      },
+      name: "",
+      image: "",
+      description: "",
     };
   },
   methods: {
     submitForm() {
-      this.$emit("add-game", { ...this.boardGame });
+      const newGame = new BoardGame(this.name, this.image, this.description);
+      this.$emit("add-game", newGame);
       this.resetForm();
     },
     resetForm() {
-      this.boardGame = {
-        name: "",
-        image: "",
-        description: "",
-      };
+      this.name = "";
+      this.image = "";
+      this.description = "";
     },
   },
 };
