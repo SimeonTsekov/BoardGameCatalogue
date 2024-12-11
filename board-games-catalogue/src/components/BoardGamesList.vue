@@ -11,10 +11,12 @@
   </template>
   
   <script>
+  import { defineComponent, toRefs } from "vue";
   import "@/assets/board-games-list.css";
   import BoardGameCard from "@/components/BoardGameCard.vue";
   
-  export default {
+  export default defineComponent({
+    name: "BoardGamesList",
     props: {
       games: {
         type: Array,
@@ -24,5 +26,13 @@
     components: {
       BoardGameCard,
     },
-  };
+    setup(props) {
+      const { games } = toRefs(props);
+  
+      return {
+        games,
+      };
+    },
+  });
   </script>
+  

@@ -16,7 +16,7 @@
       <div class="form-group">
         <label for="image">Image URL:</label>
         <input
-          type="test"
+          type="text"
           id="image"
           v-model="image"
           placeholder="Enter image URL"
@@ -41,29 +41,38 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import "@/assets/add-game-form.css";
 import BoardGame from "@/model/BoardGame";
 
 export default {
-  data() {
-    return {
-      name: "",
-      image: "",
-      description: "",
+  name: "AddBoardGameForm",
+  setup(props, { emit }) {
+    // Reactive form fields using ref
+    const name = ref("");
+    const image = ref("");
+    const description = ref("");
+
+    // Submit form method
+    const submitForm = () => {
+      const newGame = new BoardGame(name.value, image.value, description.value);
+      emit("add-game", newGame); // Emit the new game to the parent
+      resetForm(); // Reset the form fields
     };
-  },
-  methods: {
-    submitForm() {
-      const newGame = new BoardGame(this.name, this.image, this.description);
-      this.$emit("add-game", newGame);
-      this.resetForm();
-    },
-    resetForm() {
-      this.name = "";
-      this.image = "";
-      this.description = "";
-    },
+
+    // Reset form fields
+    const resetForm = () => {
+      name.value = "";
+      image.value = "";
+      description.value = "";
+    };
+
+    return {
+      name,
+      image,
+      description,
+      submitForm,
+    };
   },
 };
 </script>
-  

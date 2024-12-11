@@ -22,30 +22,37 @@
 </template>
 
 <script>
+import { ref } from "vue";
 import "@/assets/main.css";
 import "@/assets/popover.css";
 import AddBoardGameForm from "@/components/AddBoardGameForm.vue";
 import BoardGamesList from "@/components/BoardGamesList.vue";
 
 export default {
+  name: "App",
   components: {
     AddBoardGameForm,
     BoardGamesList,
   },
-  data() {
-    return {
-      showForm: false,
-      games: [],
+  setup() {
+    const showForm = ref(false);
+    const games = ref([]);
+
+    const toggleForm = () => {
+      showForm.value = !showForm.value;
     };
-  },
-  methods: {
-    toggleForm() {
-      this.showForm = !this.showForm;
-    },
-    addGame(newGame) {
-      this.games.push(newGame);
-      this.showForm = false;
-    },
+
+    const addGame = (newGame) => {
+      games.value.push(newGame);
+      showForm.value = false;
+    };
+
+    return {
+      showForm,
+      games,
+      toggleForm,
+      addGame,
+    };
   },
 };
 </script>

@@ -9,14 +9,24 @@
   </template>
   
   <script>
+  import { defineComponent, toRefs } from "vue";
   import "@/assets/board-game-card.css";
   
-  export default {
+  export default defineComponent({
+    name: "BoardGameCard",
     props: {
       game: {
         type: Object,
         required: true,
       },
     },
-  };
+    setup(props) {
+      const { game } = toRefs(props);
+  
+      return {
+        game,
+      };
+    },
+  });
   </script>
+  
