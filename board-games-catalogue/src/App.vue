@@ -20,28 +20,19 @@
     </div>
 
     <!-- List of board games -->
-    <div v-if="games.length" class="game-list">
-      <h2>Games List</h2>
-      <ul>
-        <li v-for="(game, index) in games" :key="index">
-          <BoardGameCard :game="game" />
-        </li>
-      </ul>
-    </div>
-
-    <!-- No games message -->
+    <BoardGamesList v-if="games.length" :games="games" />
     <p v-else>No games added yet!</p>
   </div>
 </template>
 
 <script>
 import AddBoardGameForm from "./components/AddBoardGameForm.vue";
-import BoardGameCard from "./components/BoardGameCard.vue";
+import BoardGamesList from "./components/BoardGamesList.vue";
 
 export default {
   components: {
     AddBoardGameForm,
-    BoardGameCard,
+    BoardGamesList,
   },
   data() {
     return {
@@ -119,16 +110,5 @@ button:hover {
 
 .close-button:hover {
   color: red;
-}
-
-/* Game list styles */
-.game-list {
-  margin-top: 20px;
-  text-align: left;
-}
-
-.game-list ul {
-  list-style-type: none;
-  padding: 0;
 }
 </style>
