@@ -3,7 +3,7 @@
     <h1>Board Games Catalogue</h1>
 
     <button @click="toggleForm">
-      {{ showForm ? "Close Form" : "Add New Board Game" }}
+      Add A Board Game
     </button>
 
     <div
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import "./styles/app.css";
-import "./styles/popover.css";
-import AddBoardGameForm from "./components/AddBoardGameForm.vue";
-import BoardGamesList from "./components/BoardGamesList.vue";
+import "@/assets/main.css";
+import "@/assets/popover.css";
+import AddBoardGameForm from "@/components/AddBoardGameForm.vue";
+import BoardGamesList from "@/components/BoardGamesList.vue";
 
 export default {
   components: {

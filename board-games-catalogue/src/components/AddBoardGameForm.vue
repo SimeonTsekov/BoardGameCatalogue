@@ -41,8 +41,8 @@
 </template>
 
 <script>
-import "../styles/add-game-form.css";
-import BoardGame from "../model/BoardGame";
+import "@/assets/add-game-form.css";
+import BoardGame from "@/model/BoardGame";
 
 export default {
   data() {

@@ -9,7 +9,7 @@
   </template>
   
   <script>
-  import "../styles/board-game-card.css";
+  import "@/assets/board-game-card.css";
   
   export default {
     props: {

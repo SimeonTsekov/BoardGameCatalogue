@@ -11,8 +11,8 @@
   </template>
   
   <script>
-  import "../styles/board-games-list.css";
-  import BoardGameCard from "./BoardGameCard.vue";
+  import "@/assets/board-games-list.css";
+  import BoardGameCard from "@/components/BoardGameCard.vue";
   
   export default {
     props: {
