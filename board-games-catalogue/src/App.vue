@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <h1>Board Games Catalogue</h1>
-    <button @click="toggleForm">{{ showForm ? "Close Form" : "Add New Board Game" }}</button>
+
+    <!-- Button to toggle the form -->
+    <button @click="toggleForm">
+      {{ showForm ? "Close Form" : "Add New Board Game" }}
+    </button>
 
     <!-- Popover for the form -->
     <div
@@ -15,27 +19,29 @@
       </div>
     </div>
 
+    <!-- List of board games -->
     <div v-if="games.length" class="game-list">
       <h2>Games List</h2>
       <ul>
         <li v-for="(game, index) in games" :key="index">
-          <img :src="game.image" :alt="game.name" class="game-image" />
-          <div>
-            <h3>{{ game.name }}</h3>
-            <p>{{ game.description }}</p>
-          </div>
+          <BoardGameCard :game="game" />
         </li>
       </ul>
     </div>
+
+    <!-- No games message -->
+    <p v-else>No games added yet!</p>
   </div>
 </template>
 
 <script>
 import AddBoardGameForm from "./components/AddBoardGameForm.vue";
+import BoardGameCard from "./components/BoardGameCard.vue";
 
 export default {
   components: {
     AddBoardGameForm,
+    BoardGameCard,
   },
   data() {
     return {
@@ -124,29 +130,5 @@ button:hover {
 .game-list ul {
   list-style-type: none;
   padding: 0;
-}
-
-.game-list li {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-}
-
-.game-image {
-  width: 100px;
-  height: 100px;
-  margin-right: 15px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.game-list h3 {
-  margin: 0;
-}
-
-.game-list p {
-  margin: 5px 0 0;
 }
 </style>
