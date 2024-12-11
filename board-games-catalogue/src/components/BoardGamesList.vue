@@ -10,6 +10,7 @@
   </template>
   
   <script>
+  import "../styles/board-games-list.css";
   import BoardGameCard from "./BoardGameCard.vue";
   
   export default {
@@ -24,19 +25,3 @@
     },
   };
   </script>
-  
-  <style scoped>
-  .board-games-list {
-    margin-top: 20px;
-    text-align: left;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 15px;
-  }
-  </style>
