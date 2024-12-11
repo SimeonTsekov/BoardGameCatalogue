@@ -17,8 +17,7 @@
       </div>
     </div>
 
-    <BoardGamesList v-if="games.length" :games="games" />
-    <p v-else>No games added yet!</p>
+    <BoardGamesList :games="games" />
   </div>
 </template>
 

@@ -1,11 +1,12 @@
 <template>
     <div class="board-games-list">
       <h2>Games List</h2>
-      <ul>
+      <ul v-if="games.length">
         <li v-for="(game, index) in games" :key="index">
           <BoardGameCard :game="game" />
         </li>
       </ul>
+      <p v-else>No games added yet!</p>
     </div>
   </template>
   
