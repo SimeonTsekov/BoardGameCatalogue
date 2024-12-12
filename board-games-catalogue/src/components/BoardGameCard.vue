@@ -1,31 +1,40 @@
 <template>
-    <div class="board-game-card">
-      <img :src="game.image" :alt="game.name" class="game-image" />
-      <div>
-        <h3>{{ game.name }}</h3>
-        <p>{{ game.description }}</p>
-      </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <div class="board-game-card">
+    <div class="image-container">
+      <img :src="game.image" :alt="game.name" />
     </div>
-  </template>
+    <div>
+      <h3>{{ game.name }}</h3>
+      <p>{{ game.description }}</p>
+    </div>
+    <button @click="deleteGame" class="delete-button">
+      <i class="fa fa-trash-o"></i>
+    </button>
+  </div>
+</template>
 
-  <script>
-  import { defineComponent, toRefs } from "vue";
-  import "@/assets/board-game-card.css";
+<script>
+import { defineComponent } from "vue";
+import "@/assets/board-game-card.css";
 
-  export default defineComponent({
-    name: "BoardGameCard",
-    props: {
-      game: {
-        type: Object,
-        required: true,
-      },
+export default defineComponent({
+  name: "BoardGameCard",
+  props: {
+    game: {
+      type: Object,
+      required: true,
     },
-    setup(props) {
-      const { gameObject } = toRefs(props);
+  },
+  emits: ["delete-game"],
+  setup(props, { emit }) {
+    const deleteGame = () => {
+      emit("delete-game")
+    }
 
-      return {
-        gameObject,
-      };
-    },
-  });
-  </script>
+    return {
+      deleteGame
+    };
+  },
+});
+</script>

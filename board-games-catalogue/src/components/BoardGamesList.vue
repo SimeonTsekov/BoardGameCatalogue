@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="topnav">
+    <button>
+      <i class="fa fa-search"></i>
+    </button>
     <input
       type="text"
       v-model="searchQuery"
@@ -7,14 +10,12 @@
     />
   </div>
   <div class="board-games-list">
-    <h2>Games List</h2>
-    <ul v-if="games.length">
+    <ul v-if="filteredGamesList.length">
       <li v-for="(game, index) in filteredGamesList" :key="index">
-        <BoardGameCard :game="game" />
-        <button @click="deleteGame(game)">Delete item</button>
+        <BoardGameCard :game="game" @delete-game="deleteGame(game)" />
       </li>
     </ul>
-    <p v-else>No games added yet!</p>
+    <p v-else>No games found!</p>
   </div>
 </template>
 
@@ -35,13 +36,13 @@ export default defineComponent({
     BoardGameCard,
   },
   emits: [
-    "delete-game"
+    "remove-game"
   ],
   setup(props, { emit }) {
     const searchQuery = ref("");
 
     const deleteGame = (gameObject) => {
-      emit("delete-game", gameObject);
+      emit("remove-game", gameObject);
     };
 
     const filteredGamesList = computed(() => {

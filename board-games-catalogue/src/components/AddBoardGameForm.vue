@@ -35,7 +35,7 @@
         ></textarea>
       </div>
 
-      <button type="submit">Add Board Game</button>
+      <button class="add-button" type="submit">Add Board Game</button>
     </form>
   </div>
 </template>
