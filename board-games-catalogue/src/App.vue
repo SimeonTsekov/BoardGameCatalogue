@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <BoardGamesList :games="games" />
+    <BoardGamesList :games="games" @remove-game="removeGame" />
   </div>
 </template>
 
@@ -27,6 +27,7 @@ import "@/assets/main.css";
 import "@/assets/popover.css";
 import AddBoardGameForm from "@/components/AddBoardGameForm.vue";
 import BoardGamesList from "@/components/BoardGamesList.vue";
+import BoardGame from "@/model/BoardGame.js"
 
 export default {
   name: "App",
@@ -36,7 +37,10 @@ export default {
   },
   setup() {
     const showForm = ref(false);
-    const games = ref([]);
+    const games = ref([
+      new BoardGame("Test 1", "Test 1", "Test 1 Description"),
+      new BoardGame("Test 2", "Test 2", "Test 2 Description")
+    ]);
 
     const toggleForm = () => {
       showForm.value = !showForm.value;
@@ -47,11 +51,16 @@ export default {
       showForm.value = false;
     };
 
+    const removeGame = (game) => {
+      games.value.splice(games.value.indexOf(game), 1)
+    };
+
     return {
       showForm,
       games,
       toggleForm,
       addGame,
+      removeGame
     };
   },
 };

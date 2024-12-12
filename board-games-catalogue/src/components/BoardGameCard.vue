@@ -7,11 +7,11 @@
       </div>
     </div>
   </template>
-  
+
   <script>
   import { defineComponent, toRefs } from "vue";
   import "@/assets/board-game-card.css";
-  
+
   export default defineComponent({
     name: "BoardGameCard",
     props: {
@@ -21,12 +21,11 @@
       },
     },
     setup(props) {
-      const { game } = toRefs(props);
-  
+      const { gameObject } = toRefs(props);
+
       return {
-        game,
+        gameObject,
       };
     },
   });
   </script>
-  
