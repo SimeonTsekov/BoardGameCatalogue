@@ -1,10 +1,17 @@
 <template>
+  <div>
+    <input
+      type="text"
+      v-model="searchQuery"
+      placeholder="Search games..."
+    />
+  </div>
   <div class="board-games-list">
     <h2>Games List</h2>
     <ul v-if="games.length">
-      <li v-for="(game, index) in games" :key="index">
+      <li v-for="(game, index) in filteredGamesList" :key="index">
         <BoardGameCard :game="game" />
-        <button @click="deleteItem(game)">Delete item</button>
+        <button @click="deleteGame(game)">Delete item</button>
       </li>
     </ul>
     <p v-else>No games added yet!</p>
@@ -12,7 +19,7 @@
 </template>
 
 <script>
-import { defineComponent, toRefs } from "vue";
+import { defineComponent, ref, computed } from "vue";
 import "@/assets/board-games-list.css";
 import BoardGameCard from "@/components/BoardGameCard.vue";
 
@@ -27,16 +34,26 @@ export default defineComponent({
   components: {
     BoardGameCard,
   },
+  emits: [
+    "delete-game"
+  ],
   setup(props, { emit }) {
-    const { gamesList } = toRefs(props);
+    const searchQuery = ref("");
 
-    const deleteItem = (gameObject) => {
-      emit("remove-game", gameObject);
+    const deleteGame = (gameObject) => {
+      emit("delete-game", gameObject);
     };
 
+    const filteredGamesList = computed(() => {
+      return props.games.filter((game) => {
+        return game.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+      })
+    });
+
     return {
-      gamesList,
-      deleteItem
+      searchQuery,
+      deleteGame,
+      filteredGamesList
     };
   },
 });
