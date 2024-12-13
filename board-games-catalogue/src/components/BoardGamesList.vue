@@ -1,19 +1,6 @@
 <template>
-  <div class="topnav">
-    <button @click="addGame">
-      <i class="fa fa-plus"></i>
-    </button>
-    <div class="search-bar">
-      <button  >
-        <i class="fa fa-search"></i>
-      </button>
-      <input
-        type="text"
-        v-model="searchQuery"
-        placeholder="Search games..."
-      />
-    </div>
-  </div>
+  <SearchBar @update-quary="updateFilter" @add-game="addGame" />
+
   <div class="board-games-list">
     <ul v-if="filteredGamesList.length">
       <li v-for="(game, index) in filteredGamesList" :key="index">
@@ -28,6 +15,7 @@
 import { defineComponent, ref, computed } from "vue";
 import "@/assets/board-games-list.css";
 import BoardGameCard from "@/components/BoardGameCard.vue";
+import SearchBar from "@/components/SearchBar.vue"
 
 export default defineComponent({
   name: "BoardGamesList",
@@ -39,6 +27,7 @@ export default defineComponent({
   },
   components: {
     BoardGameCard,
+    SearchBar
   },
   emits: [
     "add-game",
@@ -61,11 +50,16 @@ export default defineComponent({
       emit("remove-game", gameObject);
     };
 
+    const updateFilter = (newSearchQuery) => {
+      searchQuery.value = newSearchQuery.value
+    }
+
     return {
       searchQuery,
       filteredGamesList,
       addGame,
-      deleteGame
+      deleteGame,
+      updateFilter
     };
   },
 });
