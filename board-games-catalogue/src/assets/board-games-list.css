@@ -11,3 +11,9 @@ ul {
 li {
   margin-bottom: 15px;
 }
+
+.empty-list {
+  margin-left: 165px;
+  font-size: 20px;
+  font-weight: bold;
+}

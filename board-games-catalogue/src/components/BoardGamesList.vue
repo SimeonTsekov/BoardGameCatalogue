@@ -1,5 +1,5 @@
 <template>
-  <SearchBar @update-quary="updateFilter" @add-game="addGame" />
+  <SearchBar @update-query="updateFilter" @add-game="addGame" />
 
   <div class="board-games-list">
     <ul v-if="filteredGamesList.length">
@@ -7,7 +7,7 @@
         <BoardGameCard :game="game" @delete-game="deleteGame(game)" />
       </li>
     </ul>
-    <p v-else>No games found!</p>
+    <p v-else class="empty-list">No games found!</p>
   </div>
 </template>
 
