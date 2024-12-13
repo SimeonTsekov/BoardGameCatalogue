@@ -6,38 +6,46 @@
     gap: 70px;
     padding-bottom: 10px;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .search-bar {
+}
+
+.search-bar {
     display: flex;
     flex-direction: row;
     gap: 15px;
-  }
-  
-  .topnav > button,
-  .topnav > .search-bar > button {
+}
+
+.plus-button,
+.search-bar > button {
     flex: none;
     width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     border: none;
     background-color: white;
     color: rgb(200, 200, 200);
-  }
-  
-  .topnav > button:hover,
-  .topnav > .search-bar > button:hover {
+}
+
+.plus-button,
+.search-bar > button:hover {
     color: rgb(170, 170, 170);
     transition: 0.3s;
-  }
-  
-  .topnav > button > i,
-  .topnav > .search-bar > button > i {
+}
+
+.plus-button:hover {
+    color: rgba(23, 136, 23, 0.669);
+}
+
+.plus-button > i,
+.search-bar > button > i {
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    font-size: 28px;
-  }
-  
-  .search-bar > input {
+    object-fit: fill;
+    font-size: 30px;
+}
+
+.search-bar > input {
     margin: 0;
     width: 400px;
-  }
+}

@@ -1,10 +1,10 @@
 <template>
   <div class="topnav">
-    <button @click="addGame">
+    <button class="plus-button" @click="addGame">
       <i class="fa fa-plus"></i>
     </button>
     <div class="search-bar">
-      <button  >
+      <button>
         <i class="fa fa-search"></i>
       </button>
       <input
