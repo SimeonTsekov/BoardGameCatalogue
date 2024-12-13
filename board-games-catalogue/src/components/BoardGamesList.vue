@@ -1,13 +1,18 @@
 <template>
   <div class="topnav">
-    <button>
-      <i class="fa fa-search"></i>
+    <button @click="addGame">
+      <i class="fa fa-plus"></i>
     </button>
-    <input
-      type="text"
-      v-model="searchQuery"
-      placeholder="Search games..."
-    />
+    <div class="search-bar">
+      <button  >
+        <i class="fa fa-search"></i>
+      </button>
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search games..."
+      />
+    </div>
   </div>
   <div class="board-games-list">
     <ul v-if="filteredGamesList.length">
@@ -36,14 +41,11 @@ export default defineComponent({
     BoardGameCard,
   },
   emits: [
+    "add-game",
     "remove-game"
   ],
   setup(props, { emit }) {
     const searchQuery = ref("");
-
-    const deleteGame = (gameObject) => {
-      emit("remove-game", gameObject);
-    };
 
     const filteredGamesList = computed(() => {
       return props.games.filter((game) => {
@@ -51,10 +53,19 @@ export default defineComponent({
       })
     });
 
+    const addGame = () => {
+      emit("add-game")
+    }
+
+    const deleteGame = (gameObject) => {
+      emit("remove-game", gameObject);
+    };
+
     return {
       searchQuery,
-      deleteGame,
-      filteredGamesList
+      filteredGamesList,
+      addGame,
+      deleteGame
     };
   },
 });
